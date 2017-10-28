@@ -1,5 +1,5 @@
 #include <iostream>
-#include <crystal.h>
+#include "crystal.h"
 
 int main() {
     auto lat = make_face_centered_cubic();

@@ -5,14 +5,15 @@
 #include <memory>
 #include <iostream>
 #include "number/Mat.h"
+#include "common.h"
 
 struct LatPnt {
-    Number::Vec<int, 3> reR;
-    Number::Vec<double, 3> r;
+    vec3i reR;
+    vec3d r;
 };
 
 struct Atom {
-    using Cord = Number::Vec<double, 3>;
+    using Cord = vec3d;
     Cord r;
     const int type;
 
@@ -30,7 +31,7 @@ struct Cell {
 
 class Lattice {
 public:
-    using Cord = Number::Vec<double, 3>;
+    using Cord = vec3d;
 public:
     Lattice(const Cord a1, const Cord a2, const Cord a3,
         const int n1, const int n2, const int n3): _transVec(concat(a1, a2, a3)),
@@ -67,7 +68,7 @@ private:
 }; // class Lattice
 
 class Crystal {
-    using Cord = Number::Vec<double, 3>;
+    using Cord = vec3d;
 public:
     Crystal(const Lattice& lat, const Cell& cell): _lat(lat), _cell(cell), _atoms(new std::vector<Atom>()) {
         construct_crystal();
