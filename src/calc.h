@@ -20,6 +20,14 @@ inline vec3d force2_Van(vec3d dest, vec3d source, double sigma, double epsilon) 
 	return force;
 }
 
+inline vec3d force_Van(std::shared_ptr<std::vector<vec3d>> atoms, size_t desId, double sigma, double epsilon) {
+	vec3d force = { 0, 0, 0 };
+	for (size_t ii = 0; ii < atoms->size(); ++ii)
+		if (ii != desId)
+			force = force + force2_Van(atoms->operator[](desId), atoms->operator[](ii), sigma, epsilon);
+	return force;
+}
+
 inline double potential_Van(std::shared_ptr<std::vector<vec3d>> atoms, double sigma, double epsilon) {
 	double potential = 0;
 	for (int jj = 0; jj < atoms->size(); ++jj)
